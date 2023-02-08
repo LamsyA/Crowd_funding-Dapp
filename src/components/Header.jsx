@@ -8,7 +8,7 @@ const Header = () => {
     >
         <a href='#' className='flex text-black space-x-1 justify-center
         items-center'> 
-        <span>Header</span>
+        <span>Crow</span>
         <GrBusinessService/>
         </a>
 

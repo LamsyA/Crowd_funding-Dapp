@@ -1,0 +1,39 @@
+
+
+const Hero = () => {
+  return (
+    <div className="text-center bg-amber-50 text-gray-800 py-24 px-5">
+    <h1 className="text-5xl md:text-6xl xl:text-7xl font-bold 
+    tracking-tight mb-12">
+      <span className="capitalize"> Bring creative projects to life on </span>
+      <br />
+      <span className="uppercase text-lime-600">Crow.</span>
+    </h1>
+   <div className="flex justify-center items-center space-x-2">
+   <button type='button'
+            className='inline-block bg-lime-500 px-5 py-2 text-white
+            font-medium text-xs leading-tight uppercase rounded-full 
+            shadow-md hover:bg-lime-600'> 
+             Add Project
+    </button>
+
+    <button type='button'
+            className='inline-block border border-lime-500 px-5 py-2
+             text-lime-600 bg-transparent font-medium text-xs
+             leading-tight uppercase rounded-full hover:text-white
+            shadow-md  hover:bg-lime-600'>
+               Back Projects
+    </button>
+   </div>
+   <div>
+    <div>
+      <span>
+        
+      </span>
+    </div>
+   </div>
+    </div>
+  )
+}
+
+export default Hero
