@@ -3,7 +3,7 @@ import Hero from "./components/Hero"
 
 const App = () => {
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen relative">
       <Header/>
       <Hero />
     </div>
