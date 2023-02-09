@@ -25,11 +25,24 @@ const Hero = () => {
                Back Projects
     </button>
    </div>
-   <div>
-    <div>
-      <span>
-        
-      </span>
+   <div className="flex justify-center items-center mt-10">
+    <div className="flex flex-col justify-center items-center
+     h-20 border shadow-md w-full">
+      <span className="text-lg font-bold text-lime-900 
+      leading-5 ">{0} </span>
+      <span >Projects</span>
+    </div>
+    <div className="flex flex-col justify-center items-center
+     h-20 border shadow-md w-full">
+      <span className="text-lg font-bold text-lime-900 
+      leading-5 ">{0} </span>
+      <span >Backings</span>
+    </div>
+    <div className="flex flex-col justify-center items-center
+     h-20 border shadow-md w-full">
+      <span className="text-lg font-bold text-lime-900 
+      leading-5 ">{0}ETH </span>
+      <span >Donated</span>
     </div>
    </div>
     </div>
