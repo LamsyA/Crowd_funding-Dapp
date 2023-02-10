@@ -3,12 +3,12 @@ import {FaEthereum} from "react-icons/fa"
 
 const ProjectDetails = () => {
   return (
-    <div className="py-24 px-5 flex  justify-center">
-       <div className='flex justify-center flex-col md:2/3' >
+    <div className="pt-24 mb-5 px-5 flex justify-center">
+       <div className='flex justify-center flex-col md:w-2/3' >
        <div className="flex justify-start items-start sm:space-x-4 flex-wrap">
              <img src="https://media.wired.com/photos/5926e64caf95806129f50fde/master/pass/AnkiHP.jpg"
                     alt="project title" 
-                    className="rounded-xl h-64 object-cover w-full sm:w-1/3 "
+                    className="rounded-xl h-64 object-cover sm:w-1/3 w-full  "
                     />
             <div className="flex-1 sm:py-0 py-4 ">
                 <div className="flex flex-col justify-start flex-wrap">
