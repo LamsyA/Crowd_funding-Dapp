@@ -1,3 +1,4 @@
+import CreateProject from '../components/CreateProject'
 import Hero from '../components/Hero'
 import Project from '../components/Project'
 
@@ -15,6 +16,7 @@ const Home = () => {
             shadow-md hover:bg-lime-600'> Load More</button>
         </div>
     </div>
+    <CreateProject/>
     </>
   )
 }
