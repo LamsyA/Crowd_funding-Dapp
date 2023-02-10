@@ -8,7 +8,7 @@ const Project = () => {
       {Array(6)
       .fill()
       .map((card, i)=>(
-      <ProjectCard key={i} />
+      <ProjectCard key={i} id={i} project={card} />
       ))}
       </div>
        
@@ -17,11 +17,11 @@ const Project = () => {
   )
 }
 
-const ProjectCard = ({card, id}) =>(
+const ProjectCard = ({project, id}) =>(
   <div id="projects" className="rounded-lg shadow-lg bg-white
    m-4 w-64"> 
    <Link to={'/projects/' + id}>
-    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQz2ZGKJNIItKnP1Wa4Q5pLIHHEF98FRv2KaA&usqp=CAU"
+    <img src="https://media.wired.com/photos/5926e64caf95806129f50fde/master/pass/AnkiHP.jpg"
     alt="project title" 
     className="rounded-xl h-64 w-full object-cover"
     />
@@ -42,10 +42,17 @@ const ProjectCard = ({card, id}) =>(
       <div className="w-full bg-gray-300"> 
         <div className="bg-lime-600 text text-xs font-medium
         text-lime-100 text-center p-0.5 leading-none rounded-l-full
-        h-1"
+        "
         style={{width : '50%'}}
         ></div>
       </div>
+      <div className="flex justify-between items-center flex-wrap
+        mt-4 mb-2 text-gray-500 font-bold">
+          <small >{14} Backers</small> 
+          <div>
+            <small className="text-lime-500">Open</small>
+          </div>
+        </div>
     </div>
      </Link>
    </div>
