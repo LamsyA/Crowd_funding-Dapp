@@ -89,8 +89,8 @@ const UpdateProject = () => {
             <button type='submit' 
             className='inline-block bg-lime-600 px-6 py-2.5 text-white
             font-medium  leading-tight text-md rounded-full 
-            shadow-md hover:bg-lime-700 mt-5'> 
-             Update Project
+            shadow-md hover:bg-lime-700 mt-5 '> 
+             Update Project 
             </button>
         </form>
     </div>
