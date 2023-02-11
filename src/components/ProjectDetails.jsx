@@ -1,5 +1,6 @@
 import Identicons from 'react-identicons'
 import {FaEthereum} from "react-icons/fa"
+import { setGlobalState } from '../store'
 
 const ProjectDetails = () => {
   return (
@@ -53,13 +54,19 @@ const ProjectDetails = () => {
    <button type='button'
             className='inline-block bg-lime-500 px-5 py-2 text-white
             font-medium text-xs leading-tight uppercase rounded-full 
-            shadow-md hover:bg-lime-600'> 
+            shadow-md hover:bg-lime-600'
+            onClick={()=> setGlobalState("backModal","scale-100")}
+            
+            > 
              Back Project
     </button>
     <button type='button'
             className='inline-block bg-gray-500 px-5 py-2 text-white
             font-medium text-xs leading-tight uppercase rounded-full 
-            shadow-md hover:bg-gray-600'> 
+            shadow-md hover:bg-gray-600'
+            onClick={()=> setGlobalState("updateModal","scale-100")}
+            
+            > 
              Edit 
     </button>
     <button type='button'

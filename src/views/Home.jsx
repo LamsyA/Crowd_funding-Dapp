@@ -4,6 +4,7 @@ import Hero from '../components/Hero'
 import Project from '../components/Project'
 
 
+
 const Home = () => {
   return (
     < >
@@ -18,6 +19,7 @@ const Home = () => {
         </div>
     </div>
     <CreateProject/>
+    
     <AddButton />
     </>
   )
