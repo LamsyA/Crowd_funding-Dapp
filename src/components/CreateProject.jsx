@@ -1,11 +1,13 @@
 import React from 'react'
 import { FaTimes } from 'react-icons/fa'
+import { useGlobalState, setGlobalState } from '../store'
 
 const CreateProject = () => {
+    const [createModal] = useGlobalState('createModal')
   return (
     <div className={`fixed top-0 left-0 w-screen h-screen flex
     items-center justify-center bg-black bg-opacity-50
-    transform transition-transform duration-300 scale-100`}>
+    transform transition-transform duration-300 ${createModal}`}>
     <div className='bg-white shadow-xl shadow-black rounded-xl
     w-11/12 md:w-2/5 h-7/12 p-6'>
         <form className='flex flex-col'> 
@@ -13,6 +15,8 @@ const CreateProject = () => {
                 <p className='font-semibold '>Add Project</p>
             <button type='button'
             className='border-0 bg-transparent focus:outline-none '
+            onClick={()=> setGlobalState("createModal","scale-0")}
+            
             >
                 <FaTimes/>
             </button>

@@ -1,3 +1,4 @@
+import AddButton from '../components/AddButton'
 import CreateProject from '../components/CreateProject'
 import Hero from '../components/Hero'
 import Project from '../components/Project'
@@ -17,6 +18,7 @@ const Home = () => {
         </div>
     </div>
     <CreateProject/>
+    <AddButton />
     </>
   )
 }
