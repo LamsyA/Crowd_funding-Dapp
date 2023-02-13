@@ -6,8 +6,7 @@ const {setGlobalState, useGlobalState, getGlobalState } = createGlobalState({
     updateModal: "scale-0",
     backModal: "scale-0",
     deleteModal: "scale-0",
-
-
+    connectAccount: '',
 })
 
 const truncate = (text, startChars, endChars, maxLength) => {
