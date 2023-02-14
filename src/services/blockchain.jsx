@@ -31,7 +31,7 @@ const isWalletConnected = async () => {
             setGlobalState('connectedAccount', accounts[0]?.toLowerCase())
             await isWalletConnected()
         })
-        if(account.length){
+        if(accounts.length){
             setGlobalState('connectedAccount', accounts[0]?.toLowerCase())
         } else {
             alert("Please connect wallet.")
