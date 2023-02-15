@@ -41,6 +41,41 @@ const isWalletConnected = async () => {
             reportError(error)
         }
     }
+const getContract = async () => {
+    const connectedAccount = getGlobalState('connectedAccount')
+
+    if (connectedAccount) {
+        const provider = await new ethers.providers.Web3Provider(ethereum)
+        const signer = provider.getSigner()
+        const contract = await new ethers.Contract(contractAddress, contractAbi, signer)
+        return contract
+    } else {
+        return getGlobalState('contract')
+    }
+
+}
+
+const createProject = async ({
+    title,
+    description,
+    imageURL,
+    cost,
+    expiresAt
+}) => {
+    try {
+        if(!ethereum) return alert("Please install Metamask")
+
+        const contract = await getContract()
+        cost = ethers.utils.parseEther(cost)
+        await contract.createProject(title, description, imageURL, expiresAt)
+
+        await loadProjects()
+        window.location.reload()
+    } catch (error) {
+        reportError(error)
+    }
+    
+}
 
 
 const reportError = (error) => {

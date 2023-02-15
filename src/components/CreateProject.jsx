@@ -6,7 +6,7 @@ const CreateProject = () => {
     const [createModal] = useGlobalState('createModal')
     const [title, setTitle] = useState('')
     const [description, setDescription] = useState('')
-    const [amount, setAmount] = useState('')
+    const [cost, setCost] = useState('')
     const [date, setDate] = useState('')
     const [imageURL, setImageURL] = useState('')
 
@@ -15,9 +15,10 @@ const CreateProject = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        if(!title || !description || !amount || !date || !imageURL) return
+        if(!title || !description || !cost || !date || !imageURL) return
 
-        const data = { title, description, amount, date, imageURL}
+    
+    const data = { title, description, cost, expiresAt: date, imageURL}
         console.log(data)
     }
 
@@ -70,10 +71,10 @@ const CreateProject = () => {
                  type='number'
                  step={0.01}
                  min={0.01}
-                 name="amount"
-                 placeholder='Amount {ETH}'
-                 onChange={(e)=> setAmount(e.target.value)}
-                 value={amount}
+                 name="cost"
+                 placeholder='cost {ETH}'
+                 onChange={(e)=> setCost(e.target.value)}
+                 value={cost}
                  required />
             </div>
             <div className='flex justify-between items-center bg-gray-300
