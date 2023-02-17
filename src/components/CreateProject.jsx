@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { FaTimes } from 'react-icons/fa'
+import { toast } from 'react-toastify'
 import { useGlobalState, setGlobalState } from '../store'
 
 const CreateProject = () => {
@@ -10,17 +11,28 @@ const CreateProject = () => {
     const [date, setDate] = useState('')
     const [imageURL, setImageURL] = useState('')
 
+    const toTimestamp =(dateData) => {
+        const dateObj = Date.parse(dateData)
+        return dateObj / 1000 
+    }
 
 
-
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault()
         if(!title || !description || !cost || !date || !imageURL) return
 
     
-    const data = { title, description, cost, expiresAt: date, imageURL}
+    const data = { title,
+         description,
+          cost,
+           expiresAt: toTimestamp(date),
+            imageURL}
+
+        await CreateProject(data)
+        toast.success('Project created successfully')
         console.log(data)
     }
+
 
     
 
@@ -43,7 +55,7 @@ const CreateProject = () => {
             </div>
             <div  className='flex justify-center items-center mt-5'>
                 <div className='rounded-xl overflow-hidden h-20 w-20'>
-                <img src="https://media.wired.com/photos/5926e64caf95806129f50fde/master/pass/AnkiHP.jpg"
+                <img src={imageURL || "https://media.wired.com/photos/5926e64caf95806129f50fde/master/pass/AnkiHP.jpg"}
                     alt="project title" 
                     className=" h-full w-full cursor-pointer object-cover    "
                     />

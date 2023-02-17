@@ -20,7 +20,7 @@ const connectWallet = async () => {
 const isWalletConnected = async () => {
     try{
         if (!ethereum) return alert('Please install Metamask')
-        const accounts = await ethereum.request({method: "eth_requestAccounts"})
+        const accounts = await ethereum.request({method: "eth_accounts"})
         setGlobalState('connectedAccount', accounts[0]?.toLowerCase())
 
         window.ethereum.on('chainChanged',(chainId) =>{
@@ -41,13 +41,15 @@ const isWalletConnected = async () => {
             reportError(error)
         }
     }
+
+
 const getContract = async () => {
     const connectedAccount = getGlobalState('connectedAccount')
 
     if (connectedAccount) {
-        const provider = await new ethers.providers.Web3Provider(ethereum)
+        const provider =  new ethers.providers.Web3Provider(ethereum)
         const signer = provider.getSigner()
-        const contract = await new ethers.Contract(contractAddress, contractAbi, signer)
+        const contract =  new ethers.Contract(contractAddress, contractAbi, signer)
         return contract
     } else {
         return getGlobalState('contract')
@@ -67,10 +69,9 @@ const createProject = async ({
 
         const contract = await getContract()
         cost = ethers.utils.parseEther(cost)
-        await contract.createProject(title, description, imageURL, expiresAt)
+        await contract.createProject(title, description, imageURL,cost, expiresAt)
 
-        await loadProjects()
-        window.location.reload()
+        
     } catch (error) {
         reportError(error)
     }
