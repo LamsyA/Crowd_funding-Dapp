@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { FaTimes } from 'react-icons/fa'
 import { toast } from 'react-toastify'
+import { createProject } from '../services/blockchain'
 import { useGlobalState, setGlobalState } from '../store'
 
 const CreateProject = () => {
@@ -23,14 +24,16 @@ const CreateProject = () => {
 
     
     const data = { title,
-         description,
-          cost,
-           expiresAt: toTimestamp(date),
-            imageURL}
+            description,
+            imageURL,
+            cost,
+            expiresAt: toTimestamp(date)
+        }
+            console.log(data)
 
-        await CreateProject(data)
-        toast.success('Project created successfully')
-        console.log(data)
+        await createProject(data)
+        // toast.success('Project created successfully')
+        // console.log(data)
     }
 
 

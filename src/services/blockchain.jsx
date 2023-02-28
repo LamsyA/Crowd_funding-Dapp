@@ -58,19 +58,19 @@ const getContract = async () => {
 }
 
 const createProject = async ({
-    title,
-    description,
-    imageURL,
-    cost,
-    expiresAt
-}) => {
-    try {
+        title,
+        description,
+        imageURL,
+        cost,
+        expiresAt
+        }) => {
+    try { 
         if(!ethereum) return alert("Please install Metamask")
 
         const contract = await getContract()
         cost = ethers.utils.parseEther(cost)
         await contract.createProject(title, description, imageURL,cost, expiresAt)
-
+        
         
     } catch (error) {
         reportError(error)
@@ -87,4 +87,6 @@ const reportError = (error) => {
 export {
     connectWallet,
     isWalletConnected,
+    createProject
+
 }
