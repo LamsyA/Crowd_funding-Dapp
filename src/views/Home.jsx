@@ -4,10 +4,12 @@ import CreateProject from '../components/CreateProject'
 import Hero from '../components/Hero'
 import Project from '../components/Project'
 import { listProjects } from '../services/blockchain'
+import { useGlobalState } from '../store'
 
 
 
 const Home = () => {
+  const [projects] = useGlobalState('projects')
   useEffect(async () => {
     await listProjects() 
   }, [])
@@ -15,7 +17,7 @@ const Home = () => {
   return (
     < >
     <Hero />
-    <Project /> 
+    <Project projects = {projects} /> 
     <div className='flex justify-center items-center my-5'>
     <div className='flex space-x-2 justify-center'>
             <button type='button'
