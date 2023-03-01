@@ -25,6 +25,7 @@
     "react-router-dom": "6",
     "react-scripts": "5.0.0",
     "react-toastify": "^9.1.1",
+    "toastify": "^2.0.1",
     "web-vitals": "^2.1.4"
   },
   "devDependencies": {

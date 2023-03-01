@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { FaTimes } from 'react-icons/fa'
 import { toast } from 'react-toastify'
-import { createProject } from '../services/blockchain'
+import { createNewProject } from '../services/blockchain'
 import { useGlobalState, setGlobalState } from '../store'
 
 const CreateProject = () => {
@@ -31,11 +31,22 @@ const CreateProject = () => {
         }
             console.log(data)
 
-        await createProject(data)
-        // toast.success('Project created successfully')
-        // console.log(data)
+        await createNewProject(data)
+        toast.success('Project created successfully')
+        
+        onClose()
     }
-
+    const onClose = () => {
+        ()=> setGlobalState("createModal","scale-0")
+        resetParam
+    }
+     const resetParam = () => {
+        setTitle('')
+        setCost('')
+        setDescription('')
+        setImageURL('')
+        setDate('')
+     }
 
     
 
@@ -50,7 +61,7 @@ const CreateProject = () => {
                 <p className='font-semibold '>Add Project</p>
             <button type='button'
             className='border-0 bg-transparent focus:outline-none '
-            onClick={()=> setGlobalState("createModal","scale-0")}
+            onClick={onClose}
             
             >
                 <FaTimes/>

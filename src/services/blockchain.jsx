@@ -18,28 +18,29 @@ const connectWallet = async () => {
 }
 
 const isWalletConnected = async () => {
-    try{
+    try {
         if (!ethereum) return alert('Please install Metamask')
-        const accounts = await ethereum.request({method: "eth_accounts"})
+        const accounts = await ethereum.request({ method: 'eth_accounts' })
         setGlobalState('connectedAccount', accounts[0]?.toLowerCase())
-
-        window.ethereum.on('chainChanged',(chainId) =>{
-            window.location.reload()
+    
+        window.ethereum.on('chainChanged', (chainId) => {
+          window.location.reload()
         })
-
-        window.ethereum.on('accountsChanged', async() => {
-            setGlobalState('connectedAccount', accounts[0]?.toLowerCase())
-            await isWalletConnected()
+    
+        window.ethereum.on('accountsChanged', async () => {
+          setGlobalState('connectedAccount', accounts[0]?.toLowerCase())
+          await isWalletConnected()
         })
-        if(accounts.length){
-            setGlobalState('connectedAccount', accounts[0]?.toLowerCase())
+    
+        if (accounts.length) {
+          setGlobalState('connectedAccount', accounts[0]?.toLowerCase())
         } else {
-            alert("Please connect wallet.")
-            console.log("No accounts found")
+          alert('Please connect wallet.')
+          console.log('No accounts found.')
         }
-        } catch (error) {
-            reportError(error)
-        }
+      } catch (error) {
+        reportError(error)
+      }
     }
 
 
@@ -57,7 +58,7 @@ const getContract = async () => {
 
 }
 
-const createProject = async ({
+    const createNewProject = async ({
         title,
         description,
         imageURL,
@@ -77,16 +78,30 @@ const createProject = async ({
     }
     
 }
+    const listProjects = async () => {
+        try {
+            if(!ethereum) return alert("Please install Metamask")
+            const contract = await getContract()
+            const projects = await contract.getProjects()
+            const stats = await contract.stats()
+
+            setGlobalState('projects', projects)
+            setGlobalState('stats', stats)
+        }catch (error){
+            reportError(error)
+        }
+    }
 
 
 const reportError = (error) => {
     console.error(error.message)
-    throw new Error("No ethereum object found.")
+    // throw new Error("No ethereum object found.")
 }
 
 export {
     connectWallet,
     isWalletConnected,
-    createProject
+    createNewProject,
+    listProjects
 
 }
