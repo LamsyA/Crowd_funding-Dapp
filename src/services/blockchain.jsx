@@ -85,16 +85,48 @@ const getContract = async () => {
             const projects = await contract.getProjects() 
             const stats = await contract.stats()
             
-            console.log('Project', projects)
-            console.log('Stats', stats) 
-            // setGlobalState('projects', projects)
-            // setGlobalState('stats', stats)
             
+            setGlobalState('projects', restructuredProjects(projects))
+            setGlobalState('stats', restructureStats(stats))
+            console.log('Project', restructuredProjects(projects))
+            console.log('Stats', restructureStats(stats))
         }catch (error){
             reportError(error)
         }
     }
 
+    const restructuredProjects = (projects) =>
+    projects
+      .map((project) => ({
+        id: project.id.toNumber(),
+        owner: project.owner.toLowerCase(),
+        title: project.title,
+        description: project.description,
+        timestamp: new Date(project.timestamp.toNumber()).getTime(),
+        expiresAt: new Date(project.expiresAt.toNumber()).getTime(),
+        date: toDate(project.expiresAt.toNumber() * 1000),
+        imageURL: project.imageURL,
+        raised: parseInt(project.raised._hex) / 10 ** 18,
+        cost: parseInt(project.cost._hex) / 10 ** 18,
+        backers: project.backers.toNumber(),
+        status: project.status,
+      }))
+      .reverse()
+
+    const toDate = (timestamp) => {
+        const date = new Date(timestamp)
+        const dd = date.getDate() > 9 ? date.getDate() : `0${date.getDate()}`
+        const mm =
+          date.getMonth() + 1 > 9 ? date.getMonth() + 1 : `0${date.getMonth() + 1}`
+        const yyyy = date.getFullYear()
+        return `${yyyy}-${mm}-${dd}`
+      }
+      
+      const restructureStats = (stats) => ({
+        totalProjects: stats.totalProjects.toNumber(),
+        totalBacking: stats.totalBacking.toNumber(),
+        totalDonations: parseInt(stats.totalDonations._hex) / 10 ** 18,
+      })
 
 const reportError = (error) => {
     console.error(error.message)
@@ -106,5 +138,4 @@ export {
     isWalletConnected,
     createNewProject,
     listProjects
-
-}
+    }
