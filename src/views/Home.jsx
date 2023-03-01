@@ -1,11 +1,17 @@
+import { useEffect } from 'react'
 import AddButton from '../components/AddButton'
 import CreateProject from '../components/CreateProject'
 import Hero from '../components/Hero'
 import Project from '../components/Project'
+import { listProjects } from '../services/blockchain'
 
 
 
 const Home = () => {
+  useEffect(async () => {
+    await listProjects() 
+  }, [])
+  
   return (
     < >
     <Hero />

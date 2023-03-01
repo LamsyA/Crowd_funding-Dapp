@@ -37,8 +37,8 @@ const CreateProject = () => {
         onClose()
     }
     const onClose = () => {
-        ()=> setGlobalState("createModal","scale-0")
-        resetParam
+        setGlobalState("createModal","scale-0")
+        resetParam()
     }
      const resetParam = () => {
         setTitle('')

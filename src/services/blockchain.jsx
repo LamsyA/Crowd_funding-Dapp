@@ -82,11 +82,14 @@ const getContract = async () => {
         try {
             if(!ethereum) return alert("Please install Metamask")
             const contract = await getContract()
-            const projects = await contract.getProjects()
+            const projects = await contract.getProjects() 
             const stats = await contract.stats()
-
-            setGlobalState('projects', projects)
-            setGlobalState('stats', stats)
+            
+            console.log('Project', projects)
+            console.log('Stats', stats) 
+            // setGlobalState('projects', projects)
+            // setGlobalState('stats', stats)
+            
         }catch (error){
             reportError(error)
         }
