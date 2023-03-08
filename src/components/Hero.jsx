@@ -1,7 +1,8 @@
-import { setGlobalState } from "../store"
+import { setGlobalState, useGlobalState } from "../store"
 
 
 const Hero = () => {
+  const [stats] = useGlobalState("stats")
   return (
     <div className="text-center bg-amber-50 text-gray-800 py-24 px-5">
     <h1 className="text-5xl md:text-6xl xl:text-7xl font-bold 
@@ -32,19 +33,19 @@ const Hero = () => {
     <div className="flex flex-col justify-center items-center
      h-20 border shadow-md w-full">
       <span className="text-lg font-bold text-lime-900 
-      leading-5 ">{0} </span>
+      leading-5 ">{stats?.totalProjects || 0} </span>
       <span >Projects</span>
     </div>
     <div className="flex flex-col justify-center items-center
      h-20 border shadow-md w-full">
       <span className="text-lg font-bold text-lime-900 
-      leading-5 ">{0} </span>
+      leading-5 ">{stats?.totalBacking || 0} </span>
       <span >Backings</span>
     </div>
     <div className="flex flex-col justify-center items-center
      h-20 border shadow-md w-full">
       <span className="text-lg font-bold text-lime-900 
-      leading-5 ">{0}ETH </span>
+      leading-5 ">{stats?.totalDonations|| 0}ETH </span>
       <span >Donated</span>
     </div>
    </div>
