@@ -241,11 +241,9 @@ contract Crow {
         return projects;
     }
 
-    function getBackers(uint256 id)
-        public
-        view
-        returns (backerStruct[] memory)
-    {
+    function getBackers(
+        uint256 id
+    ) public view returns (backerStruct[] memory) {
         return backersOf[id];
     }
 }

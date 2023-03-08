@@ -2,27 +2,42 @@ import { Link } from "react-router-dom"
 import Identicons from "react-identicons"
 import { daysRemaining, truncate } from "../store"
 import { FaEthereum } from "react-icons/fa"
+import { useState,useEffect } from "react"
 
 const Project = ({projects}) => {
-  const [end, setEnd] = useState(1)
-  const [count] = useState(1)
+  const [end, setEnd] = useState(2)
+  const [count] = useState(2)
+  const[ collection, setCollection] = useState([])
+
+  const getCollection = () => projects.slice(0, end)
+  
+    useEffect(() => {
+      setCollection(getCollection() )
+    }, [projects, end])
+    
   
   return (
-    <div className='flex flex-col px-6 bg-amber-50'>
+    <div className='flex flex-col px-6 bg-amber-50 mb-10'>
       <div className="flex justify-center items-center flex-wrap"> 
-      {projects.map((project, i)=>(
+      {collection.map((project, i)=>(
       <ProjectCard key={i} id={i} project={project} />
       ))}
       </div>
-       
-      <div className='flex justify-center items-center my-5'>
-    <div className='flex space-x-2 justify-center'>
+       { projects.length > collection.length ? 
+       (
+        <div className='flex justify-center items-center my-5'>
+        <div className='flex space-x-2 justify-center'>
             <button type='button'
             className='inline-block bg-lime-500 px-5 py-2 text-white
             font-medium text-xs leading-tight uppercase rounded-full 
-            shadow-md hover:bg-lime-600'> Load More</button>
+            shadow-md hover:bg-lime-600'
+            onClick={() => setEnd(end + count)}
+            > Load More</button>
         </div>
     </div>
+       ) :
+        null}
+      
 
     </div>
   )
