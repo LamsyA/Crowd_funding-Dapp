@@ -1,39 +1,56 @@
 import Identicons from 'react-identicons'
+import { daysRemaining, truncate } from "../store"
 import {FaEthereum} from "react-icons/fa"
 import { setGlobalState } from '../store'
 
-const ProjectDetails = () => {
+const ProjectDetails = ({project}) => {
+console.log(project)
   return (
     <div className="pt-24 mb-5 px-5 flex justify-center">
        <div className='flex justify-center flex-col md:w-2/3' >
        <div className="flex justify-start items-start sm:space-x-4 flex-wrap">
-             <img src="https://media.wired.com/photos/5926e64caf95806129f50fde/master/pass/AnkiHP.jpg"
-                    alt="project title" 
+             <img src={project?.imageURL}
+                    alt={project?.title} 
                     className="rounded-xl h-64 object-cover sm:w-1/3 w-full  "
                     />
             <div className="flex-1 sm:py-0 py-4 ">
                 <div className="flex flex-col justify-start flex-wrap">
-                    <h5 className="text-gray-900 text-sm font-medium mb-2">
-                        Creating a Household Robot</h5>
-                    <small className="text-gray-500">3 days left</small>
+                    <h5 className="text-gray-900 text-2xl font-medium mb-2">
+                        {project?.title}</h5>
+                    <small className="text-gray-500">
+                       {new Date().getTime() > Number(project?.expiresAt + "000") ? 'Expired' :
+                        daysRemaining(project?.expiresAt)} {' '}left
+                    </small>
                 </div>
 
                 <div className="flex justify-between items-center w-full pt-1">
                     <div className="flex justify-start space-x-2">
                         <Identicons 
                         className="rounded-full shadow-md" 
-                        string="ox96e...12ac1"  size={15}/>
-                        <small className="text-gray-700">ox96e...12ac1</small>
-                        <small className="text-gray-500 font-bold">{16} Backings</small>
+                        string={project?.owner} size={15}/>
+                        {project?.owner ?
+                         (<small className="text-gray-700">
+                          {truncate(project?.owner, 5,4,11)}</small>) : null }
+                        <small className="text-gray-500 font-bold">
+                          {project?.backers} Backer{project?.backers == 1 ? '' : 's'}</small>
                     </div>
                     <div className="font-bold">
-                        <small className="text-gray-500 ">Open</small>
-
+                        {project?.status == 0 ? (
+                            <small className="text-slate-600">Open</small>
+                          ) : project?.status == 1 ? (
+                            <small className="text-lime-500">Accepted</small>
+                          ) : project?.status == 2 ? (
+                            <small className="text-slate-500">Reverted</small>
+                          ) : project?.status == 3 ? (
+                            <small className="text-red-500">Deleted</small>
+                          ) : (
+                            <small className="text-orange-500">paid</small>
+                          ) }
                     </div>
                 </div>
             </div>
         </div>
-        <p className='text-sm font-light sm:mt-3'>Testing this out this page for backing projects </p>
+        <p className='text-sm font-light sm:mt-3'>{project?.description} </p>
         <div className="w-full bg-gray-300 mt-4"> 
         <div className="bg-lime-600 text text-xs font-medium
         text-lime-100 text-center p-0.5 leading-none rounded-l-full

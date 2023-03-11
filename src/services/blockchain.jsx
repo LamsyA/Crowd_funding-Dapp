@@ -95,7 +95,24 @@ const getContract = async () => {
         }
     }
 
-    const restructuredProjects = (projects) =>
+
+    const loadProject = async (id) => {
+      try {
+          if(!ethereum) return alert("Please install Metamask")
+          const contract = await getContract()
+          const project = await contract.getProject(id)
+
+          setGlobalState('project', restructuredProjects([project])[0])
+          console.log('Project :', restructuredProjects(project)[0])
+      }catch (error){
+          reportError(error)
+      }
+  }
+
+
+
+
+    const restructuredProjects  = (projects) =>
     projects
       .map((project) => ({
         id: project.id.toNumber(),
@@ -137,5 +154,6 @@ export {
     connectWallet,
     isWalletConnected,
     createNewProject,
-    listProjects
+    listProjects,
+    loadProject
     }
