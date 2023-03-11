@@ -1,9 +1,10 @@
 import Identicons from 'react-identicons'
-import { daysRemaining, truncate } from "../store"
+import { daysRemaining, truncate, useGlobalState } from "../store"
 import {FaEthereum} from "react-icons/fa"
 import { setGlobalState } from '../store'
 
 const ProjectDetails = ({project}) => {
+  const [connectAccount] = useGlobalState('connectedAccount')
 console.log(project)
   return (
     <div className="pt-24 mb-5 px-5 flex justify-center">
@@ -55,51 +56,75 @@ console.log(project)
         <div className="bg-lime-600 text text-xs font-medium
         text-lime-100 text-center p-0.5 leading-none rounded-l-full
         "
-        style={{width : '50%'}}
+        style={{ width: `${(project?.raised / project?.cost) * 100}%` }}
         ></div>
       </div>
       <div className='flex justify-between'>
-      <small>{3} ETH Raised</small>
+      <small>{project?.raised} ETH Raised</small>
       <small className='flex justify-start item-center font-bold mt-2'>
         <FaEthereum/>
-        <span> {10} ETH</span>
+        <span> {project?.cost} ETH</span>
       </small>
 
       </div>
 
       <div className="flex justify-start items-center space-x-2 mt-4">
-   <button type='button'
-            className='inline-block bg-lime-500 px-5 py-2 text-white
-            font-medium text-xs leading-tight uppercase rounded-full 
-            shadow-md hover:bg-lime-600'
-            onClick={()=> setGlobalState("backModal","scale-100")}
-            
-            > 
-             Back Project
-    </button>
-    <button type='button'
-            className='inline-block bg-gray-500 px-5 py-2 text-white
-            font-medium text-xs leading-tight uppercase rounded-full 
-            shadow-md hover:bg-gray-600'
-            onClick={()=> setGlobalState("updateModal","scale-100")}
-            
-            > 
-             Edit 
-    </button>
-    <button type='button'
-            className='inline-block bg-red-500 px-5 py-2 text-white
-            font-medium text-xs leading-tight uppercase rounded-full 
-            shadow-md hover:bg-red-600'
-            onClick={()=> setGlobalState("deleteModal","scale-100")}
-            > 
-             Delete 
-    </button>
-    <button type='button'
-            className='inline-block bg-orange-500 px-5 py-2 text-white
-            font-medium text-xs leading-tight uppercase rounded-full 
-            shadow-md hover:bg-orange-600'> 
-             Pay Out
-    </button>
+      {project?.status == 0 ? (
+                <button type='button'
+                className='inline-block bg-lime-500 px-5 py-2 text-white
+                font-medium text-xs leading-tight uppercase rounded-full 
+                shadow-md hover:bg-lime-600'
+                onClick={()=> setGlobalState("backModal","scale-100")}
+                
+                > 
+                Back Project
+         </button>
+         ): null}
+
+          {connectAccount == project?.owner ? (
+
+            project?.status != 3 ? (
+              project?.status == 1 ? (
+                <button type='button'
+                className='inline-block bg-orange-500 px-5 py-2 text-white
+                font-medium text-xs leading-tight uppercase rounded-full 
+                shadow-md hover:bg-orange-600'> 
+                Pay Out
+             </button>
+              ) :  project?.status != 4 ? (
+                <>
+                   <button type='button'
+                 className='inline-block bg-gray-500 px-5 py-2 text-white
+                 font-medium text-xs leading-tight uppercase rounded-full 
+                 shadow-md hover:bg-gray-600'
+                 onClick={()=> setGlobalState("updateModal","scale-100")}
+                 
+                      > 
+                      Edit 
+                      </button>
+                      <button type='button'
+                              className='inline-block bg-red-500 px-5 py-2 text-white
+                              font-medium text-xs leading-tight uppercase rounded-full 
+                              shadow-md hover:bg-red-600'
+                              onClick={()=> setGlobalState("deleteModal","scale-100")}
+                              > 
+                              Delete 
+                      </button>
+                      </>
+              ) : (
+                <button
+                  type="button"
+                  className="inline-block px-6 py-2.5 bg-gray-600
+                  text-white font-medium text-xs leading-tight uppercase
+                  rounded-full shadow-md hover:bg-gray-700"
+                >
+                  Project Closed
+                </button>
+              )
+            ) : null
+          ) : null}
+
+       
    </div>
        </div>
     </div>
