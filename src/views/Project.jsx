@@ -18,7 +18,7 @@ const Project = () => {
     <>
     <ProjectDetails project={project} />
     <ProjectBackers />
-    <UpdateProject />
+    <UpdateProject project={project} />
     <BackProject/>
     <DeleteProject/>
     </>
