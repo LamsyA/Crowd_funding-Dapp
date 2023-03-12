@@ -4,11 +4,10 @@ import { toast } from 'react-toastify'
 import { createNewProject } from '../services/blockchain'
 import { useGlobalState, setGlobalState } from '../store'
 
-const UpdateProject = () => {
+const UpdateProject = ({project}) => { 
     const [updateModal] = useGlobalState('updateModal')
     const [title, setTitle] = useState(project?.title)
     const [description, setDescription] = useState(project?.description)
-    const [cost, setCost] = useState(project?.cost)
     const [date, setDate] = useState(project?.date)
     const [imageURL, setImageURL] = useState(project?.imageURL)
 
@@ -20,19 +19,18 @@ const UpdateProject = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-        if(!title || !description || !cost || !date || !imageURL) return
+        if(!title || !description ||  !date || !imageURL) return
 
     
     const data = { title,
             description,
-            imageURL,
-            cost,
+            imageURL, cost,
             expiresAt: toTimestamp(date)
         }
             console.log(data)
 
         // await createNewProject(data)
-        toast.success('Project created successfully')
+        toast.success('Project updated successfully')
         
         onClose()
     }
@@ -42,7 +40,6 @@ const UpdateProject = () => {
     }
      const resetParam = () => {
         setTitle('')
-        setCost('')
         setDescription('')
         setImageURL('')
         setDate('')
@@ -88,21 +85,7 @@ const UpdateProject = () => {
                  value={title}
                  required />
             </div>
-            <div className='flex justify-between items-center bg-gray-300
-            rounded-xl mt-5'>
-                 <input
-                 className='block w-full bg-transparent border-0
-                 text-sm text-slate-500 focus:outline-none
-                 focus:ring-0'
-                 type='number'
-                 step={0.01}
-                 min={0.01}
-                 name="cost"
-                 placeholder='cost {ETH}'
-                 onChange={(e)=> setCost(e.target.value)}
-                 value={cost}
-                 required />
-            </div>
+            
             <div className='flex justify-between items-center bg-gray-300
             rounded-xl mt-5'>
                  <input
@@ -146,7 +129,7 @@ const UpdateProject = () => {
             className='inline-block bg-lime-600 px-6 py-2.5 text-white
             font-medium  leading-tight text-md rounded-full 
             shadow-md hover:bg-lime-700 mt-5'> 
-             Submit Project
+             Update Project
             </button>
         </form>
     </div>

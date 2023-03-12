@@ -76,8 +76,31 @@ const getContract = async () => {
     } catch (error) {
         reportError(error)
     }
-    
 }
+
+
+const updateProject = async ({
+  id,
+  title,
+  description,
+  imageURL,
+  expiresAt
+  }) => {
+try { 
+  if(!ethereum) return alert("Please install Metamask")
+
+  const contract = await getContract()
+  cost = ethers.utils.parseEther(cost)
+  await contract.updateProject(id, title, description, imageURL, expiresAt)
+  
+  
+} catch (error) {
+  reportError(error)
+}
+
+}
+
+
     const listProjects = async () => {
         try {
             if(!ethereum) return alert("Please install Metamask")
