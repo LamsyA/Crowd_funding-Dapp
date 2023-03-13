@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { FaTimes } from 'react-icons/fa'
 import { toast } from 'react-toastify'
-import { createNewProject } from '../services/blockchain'
+import { updateProjectData } from '../services/blockchain'
 import { useGlobalState, setGlobalState } from '../store'
 
 const UpdateProject = ({project}) => { 
@@ -22,14 +22,17 @@ const UpdateProject = ({project}) => {
         if(!title || !description ||  !date || !imageURL) return
 
     
-    const data = { title,
+    const data = { 
+            id: project?.id,
+            title,
             description,
-            imageURL, cost,
-            expiresAt: toTimestamp(date)
+            imageURL,  
+            expiresAt: toTimestamp(date) 
         }
-            console.log(data)
+            // console.log(data)
 
-        // await createNewProject(data)
+        await updateProjectData(data)
+        
         toast.success('Project updated successfully')
         
         onClose()
@@ -39,10 +42,10 @@ const UpdateProject = ({project}) => {
         resetParam()
     }
      const resetParam = () => {
-        setTitle('')
-        setDescription('')
-        setImageURL('')
-        setDate('')
+        // setTitle('')
+        // setDescription('')
+        // setImageURL('')
+        // setDate('')
      }
 
     
