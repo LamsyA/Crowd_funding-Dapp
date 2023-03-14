@@ -63,10 +63,10 @@ const ProjectCard = ({ project, }) => (
           </div>
           <small className="text-gray-500">
             {new Date().getTime() > Number(project.expiresAt + "000") ? 'Expired' :
-              daysRemaining(project.expiresAt)} {' '}left
+              daysRemaining(project.expiresAt) + " left"}
           </small>
         </div>
-        <div className="w-full bg-gray-300">
+        <div className="w-full bg-gray-300 overflow-hidden">
           <div className="bg-lime-600 text text-xs font-medium
         text-lime-100 text-center p-0.5 leading-none rounded-l-full
         "

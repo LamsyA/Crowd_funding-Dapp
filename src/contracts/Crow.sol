@@ -216,7 +216,7 @@ contract Crow {
     function payOutProject(uint256 id) public returns (bool) {
         require(
             projects[id].status == statusEnum.APPROVED,
-            "Project no longer APPROVED"
+            "Project not APPROVED, Thus You can not pay out"
         );
         require(
             msg.sender == projects[id].owner || msg.sender == owner,

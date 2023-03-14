@@ -1,65 +1,70 @@
 import { FaEthereum } from 'react-icons/fa'
 import Identicon from 'react-identicons'
+import Moment from 'react-moment'
+import { truncate } from '../store'
 
-const ProjectBackers = () => {
-  return (
-    <div className="flex flex-col justify-center items-start md:w-2/3
+const ProjectBackers = ({ backers }) => {
+    return (
+        <div className="flex flex-col justify-center items-start md:w-2/3
      px-6 mx-auto">
-        <div 
-        className=" max-h-[calc(100vh_-_25rem)] overflow-y-auto 
+            <div
+                className=" max-h-[calc(100vh_-_25rem)] overflow-y-auto 
         shadow-md rounded-md w-full mb-10 ">
-            <table className="min-w-full">
-                <thead className="border-b">
-                    <tr>
-                        <th scope="col"
-                        className="text-sm font-medium px-6
+                <table className="min-w-full">
+                    <thead className="border-b">
+                        <tr>
+                            <th scope="col"
+                                className="text-sm font-medium px-6
                         py-4 text-left"
-                        >Backer</th>
-                        <th scope="col"
-                        className="text-sm font-medium px-6
+                            >Backer</th>
+                            <th scope="col"
+                                className="text-sm font-medium px-6
                         py-4 text-left"
-                        >Donations</th>
-                        <th scope="col"
-                        className="text-sm font-medium px-6
+                            >Donations</th>
+                            <th scope="col"
+                                className="text-sm font-medium px-6
                         py-4 text-left"
-                        >Refunded</th>
-                        <th scope="col"
-                        className="text-sm font-medium px-6
+                            >Refunded</th>
+                            <th scope="col"
+                                className="text-sm font-medium px-6
                         py-4 text-left"
-                        >Time</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {Array(16).fill().map((backing, i) =>(
-                        <tr key={i} className="border-b border-gray-200">
-                        <td className="text-sm font-light px-6 py-4 whitespace-nowrap">
-                            <div className='flex justify-start items-center space-x-2'>
-                                <Identicon className="h-10 w-10 object-contain rounded-full
-                                shadow-md"
-                                 string={"0x3fy...7a5e" + i}
-                                size={25}/>
-                                <span>0x3fy...7a5{i} </span>
-                            </div>
-                            </td> 
-                        <td className="text-sm font-light px-6 py-4 whitespace-nowrap">
-                           <small className='flex justify-start items-center space-x-2'>
-                           <FaEthereum />
-                           <span className='text-gray-700 font-medium'>{3 + i}ETH</span>
-                           </small> 
-                        </td> 
-                        <td className="text-sm font-light px-6 py-4 whitespace-nowrap">
-                        {false ? "Yes" : "No" }
-                        </td> 
-                        <td className="text-sm font-light px-6 py-4 whitespace-nowrap">
-                            {new Date().getTime()}
-                            </td> 
+                            >Time</th>
                         </tr>
-                    ))}
-                </tbody>
-            </table>
-         </div> 
-     </div>
-  )
+                    </thead>
+                    <tbody>
+                        {backers.map((backer, i) => (
+                            <Backer key={i} backer={backer} />
+                        ))}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    )
 }
 
+const Backer = ({ backer }) => (
+    <tr className="border-b border-gray-200">
+        <td className="text-sm font-light px-6 py-4 whitespace-nowrap">
+            <div className='flex justify-start items-center space-x-2'>
+                <Identicon className="h-10 w-10 object-contain rounded-full
+                                shadow-md"
+                    string={backer.owner}
+                    size={25} />
+                <span>{truncate(backer.owner, 5, 4, 10)} </span>
+            </div>
+        </td>
+        <td className="text-sm font-light px-6 py-4 whitespace-nowrap">
+            <small className='flex justify-start items-center space-x-2'>
+                <FaEthereum />
+                <span className='text-gray-700 font-medium'>{backer.contribution}ETH</span>
+            </small>
+        </td>
+        <td className="text-sm font-light px-6 py-4 whitespace-nowrap">
+            {backer.refunded ? "Yes" : "No"}
+        </td>
+        <td className="text-sm font-light px-6 py-4 whitespace-nowrap">
+            <Moment fromNow>{backer.timestamp}</Moment>
+        </td>
+    </tr>
+)
 export default ProjectBackers

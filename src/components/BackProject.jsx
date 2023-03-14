@@ -13,7 +13,7 @@ const BackProject = ({project}) => {
         
        const t =  await contributeToProject( project?.id, backAmount)
         setGlobalState("backModal","scale-0")
-        console.log("backProject ", t)
+        
     }
 
   return (
