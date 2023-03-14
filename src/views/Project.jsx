@@ -1,4 +1,4 @@
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import BackProject from "../components/BackProject"
 import DeleteProject from "../components/DeleteProject"
@@ -10,11 +10,14 @@ import { useGlobalState } from "../store"
 
 const Project = () => {
   const {id} = useParams()
+  
   const [project] = useGlobalState('project')
+  const [loaded, setLoaded] = useState(false)
   useEffect(async() =>{
     await loadProject(id)
+    setLoaded(true)
   },[])
-  return (
+  return loaded ?  (
     <>
     <ProjectDetails project={project} />
     <ProjectBackers />
@@ -22,7 +25,7 @@ const Project = () => {
     <BackProject/>
     <DeleteProject/>
     </>
-  )
+  ) : null
 }
 
 export default Project
