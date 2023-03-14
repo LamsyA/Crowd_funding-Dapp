@@ -2,7 +2,7 @@ import React from 'react'
 import { FaTimes } from 'react-icons/fa'
 import { useGlobalState, setGlobalState } from '../store'
 
-const BackProject = () => {
+const BackProject = ({project}) => {
     const [backModal] = useGlobalState('backModal')
   return (
     <div className={`fixed top-0 left-0 w-screen h-screen flex
@@ -12,7 +12,7 @@ const BackProject = () => {
     w-11/12 md:w-2/5 h-7/12 p-6'>
         <form className='flex flex-col'> 
             <div className='flex justify-between items-center'>
-                <p className='font-semibold '>#Project Title</p>
+                <p className='font-semibold '>{project?.title}</p>
             <button type='button'
             className='border-0 bg-transparent focus:outline-none '
             onClick={()=> setGlobalState("backModal","scale-0")}
@@ -23,8 +23,8 @@ const BackProject = () => {
             </div>
             <div  className='flex justify-center items-center mt-5'>
                 <div className='rounded-xl overflow-hidden h-20 w-20'>
-                <img src="https://media.wired.com/photos/5926e64caf95806129f50fde/master/pass/AnkiHP.jpg"
-                    alt="project title" 
+                <img src={project?.imageURL || "https://media.wired.com/photos/5926e64caf95806129f50fde/master/pass/AnkiHP.jpg"}
+                    alt={project?.title} 
                     className=" h-full w-full cursor-pointer object-cover    "
                     />
                 </div>
