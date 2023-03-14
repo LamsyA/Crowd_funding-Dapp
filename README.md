@@ -1,8 +1,10 @@
 
-# Hardhat-Tailwind-React Ethers Starter Kit
-Speedily develope your decentralized application with this starter kit for free!
+# Crowd Funding Decentralized Application 
+Live think https://vercel.com/olamideadetula1744-gmailcom/crowd-funding-dapp
 
-Follow the steps below to download, install, and run this project.
+You can interact with this project via the link provided above.
+
+Follow the steps below to download, install, and run this project on your local machine.
 
 ## Dependencies
 Install these prerequisites to follow along with the tutorial. See free video tutorial or a full explanation of each prerequisite.
