@@ -114,6 +114,25 @@ const getContract = async () => {
 
     }
 
+    const contributeToProject = async (id, backAmount) => {
+      try { 
+        console.log("backAmount", backAmount)
+        console.log("id", id)
+        if(!ethereum) return alert("Please install Metamask")
+        const connectedAccount = getGlobalState("connectedAccount")
+        const contract = await getContract()
+        backAmount = ethers.utils.parseEther(backAmount)
+       const t = await contract.backProject(id, {
+        from: connectedAccount,
+         value: backAmount._hex, })
+       console.log("ttttttt", t)
+        
+      } catch (error) {
+        reportError(error)
+      }
+  
+      }
+
     const listProjects = async () => {
         try {
             if(!ethereum) return alert("Please install Metamask")
@@ -193,5 +212,6 @@ export {
     listProjects,
     loadProject,
     updateProjectData,
-    deleteProject
+    deleteProject,
+    contributeToProject
     }
