@@ -1,18 +1,30 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { FaTimes } from 'react-icons/fa'
+import { contributeToProject } from '../services/blockchain'
 import { useGlobalState, setGlobalState } from '../store'
 
 const BackProject = ({project}) => {
     const [backModal] = useGlobalState('backModal')
+    const [backAmount, setBackAmount] = useState('')
+
+    const handleSubmit = async (e) => {
+        e.preventDefault()
+        if(!backAmount ) return
+        
+       const t =  await contributeToProject( project?.id, backAmount)
+        setGlobalState("backModal","scale-0")
+        console.log("backProject ", t)
+    }
+
   return (
     <div className={`fixed top-0 left-0 w-screen h-screen flex
     items-center justify-center bg-black bg-opacity-50
     transform transition-transform duration-300 ${backModal}`}>
     <div className='bg-white shadow-xl shadow-black rounded-xl
     w-11/12 md:w-2/5 h-7/12 p-6'>
-        <form className='flex flex-col'> 
+        <form onSubmit={handleSubmit} className='flex flex-col'> 
             <div className='flex justify-between items-center'>
-                <p className='font-semibold '>{project?.title}</p>
+            <p className='font-semibold '>{project?.title || "Project Title"}</p>
             <button type='button'
             className='border-0 bg-transparent focus:outline-none '
             onClick={()=> setGlobalState("backModal","scale-0")}
@@ -23,7 +35,9 @@ const BackProject = ({project}) => {
             </div>
             <div  className='flex justify-center items-center mt-5'>
                 <div className='rounded-xl overflow-hidden h-20 w-20'>
-                <img src={project?.imageURL || "https://media.wired.com/photos/5926e64caf95806129f50fde/master/pass/AnkiHP.jpg"}
+                <img 
+                src={project?.imageURL || 
+                "https://media.wired.com/photos/5926e64caf95806129f50fde/master/pass/AnkiHP.jpg"}
                     alt={project?.title} 
                     className=" h-full w-full cursor-pointer object-cover    "
                     />
@@ -41,6 +55,8 @@ const BackProject = ({project}) => {
                  min={0.01}
                  name="amount"
                  placeholder='Amount {ETH}'
+                 onChange={(e)=> setBackAmount(e.target.value)}
+                 value= {backAmount}
                  required />
             </div>
             
@@ -50,7 +66,7 @@ const BackProject = ({project}) => {
             className='inline-block bg-lime-600 px-6 py-2.5 text-white
             font-medium  leading-tight text-md rounded-full 
             shadow-md hover:bg-lime-700 mt-5'> 
-             Back Project
+             Back  Project
             </button>
         </form>
     </div>
