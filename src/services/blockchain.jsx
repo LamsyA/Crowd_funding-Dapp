@@ -100,7 +100,19 @@ const getContract = async () => {
     }
 
     }
+    const deleteProject = async ({id}) => {
+    try { 
+      
+      if(!ethereum) return alert("Please install Metamask")
+      const contract = await getContract()
+      await contract.deleteProject(id)
+     
+      
+    } catch (error) {
+      reportError(error)
+    }
 
+    }
 
     const listProjects = async () => {
         try {
@@ -180,5 +192,6 @@ export {
     createNewProject,
     listProjects,
     loadProject,
-    updateProjectData
+    updateProjectData,
+    deleteProject
     }

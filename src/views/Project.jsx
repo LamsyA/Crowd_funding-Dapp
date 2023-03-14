@@ -23,7 +23,7 @@ const Project = () => {
     <ProjectBackers />
     <UpdateProject project={project} />
     <BackProject/>
-    <DeleteProject/>
+    <DeleteProject  project={project}/>
     </>
   ) : null
 }
