@@ -20,7 +20,7 @@ const Project = () => {
   return loaded ?  (
     <>
     <ProjectDetails project={project} />
-    <ProjectBackers />
+    <ProjectBackers project={project} />
     <UpdateProject project={project} />
     <BackProject/>
     <DeleteProject  project={project}/>
