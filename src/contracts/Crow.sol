@@ -180,7 +180,7 @@ contract Crow {
             return true;
         }
 
-        if (block.timestamp < projects[id].expiresAt) {
+        if (block.timestamp >= projects[id].expiresAt) {
             projects[id].status = statusEnum.REVERTED;
             performRefund(id);
             return true;
