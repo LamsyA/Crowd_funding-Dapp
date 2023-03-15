@@ -6,6 +6,7 @@ import { pay } from '../services/blockchain'
 
 const ProjectDetails = ({ project }) => {
   const [connectAccount] = useGlobalState('connectedAccount')
+  const closed = new Date().getTime() > Number(project?.expiresAt + "000");
 
   return (
     <div className="pt-24 mb-5 px-5 flex justify-center">
@@ -20,8 +21,8 @@ const ProjectDetails = ({ project }) => {
               <h5 className="text-gray-900 text-2xl font-medium mb-2">
                 {project?.title}</h5>
               <small className="text-gray-500">
-                {new Date().getTime() > Number(project?.expiresAt + "000") ? 'Expired' :
-                  daysRemaining(project?.expiresAt)+ " left"} 
+                {closed ? 'Expired' :
+                  daysRemaining(project?.expiresAt) + " left"}
               </small>
             </div>
 
@@ -37,17 +38,20 @@ const ProjectDetails = ({ project }) => {
                   {project?.backers} Backer{project?.backers == 1 ? '' : 's'}</small>
               </div>
               <div className="font-bold">
-                {project?.status == 0 ? (
-                  <small className="text-slate-600">Open</small>
-                ) : project?.status == 1 ? (
-                  <small className="text-lime-500">Accepted</small>
-                ) : project?.status == 2 ? (
-                  <small className="text-slate-500">Reverted</small>
-                ) : project?.status == 3 ? (
-                  <small className="text-red-500">Deleted</small>
-                ) : (
-                  <small className="text-orange-500">paid</small>
-                )}
+                {closed ? (
+                  <small className="text-red-700">Expired</small>
+                ) :
+                  project?.status == 0 ? (
+                    <small className="text-slate-600">Open</small>
+                  ) : project?.status == 1 ? (
+                    <small className="text-lime-500">Accepted</small>
+                  ) : project?.status == 2 ? (
+                    <small className="text-slate-500">Reverted</small>
+                  ) : project?.status == 3 ? (
+                    <small className="text-red-500">Deleted</small>
+                  ) : (
+                    <small className="text-orange-500">paid</small>
+                  )}
               </div>
             </div>
             <div>
