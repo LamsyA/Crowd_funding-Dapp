@@ -71,7 +71,7 @@ const createNewProject = async ({
     const contract = await getContract()
     cost = ethers.utils.parseEther(cost)
     await contract.createProject(title, description, imageURL, cost, expiresAt)
-
+    return true;
 
   } catch (error) {
     reportError(error)
