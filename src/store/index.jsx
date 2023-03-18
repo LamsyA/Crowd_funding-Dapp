@@ -11,7 +11,21 @@ const { setGlobalState, useGlobalState, getGlobalState } = createGlobalState({
   project: null,
   stats: null,
   backers: [],
+  loading: { show: false, msg: '' },
+  alert: { show: false, msg: '', color: '' },
 })
+
+const setAlert = (msg, color = 'green') => {
+  setGlobalState('loading', { show: false, msg: '' })
+  setGlobalState('alert', { show: true, msg, color })
+  setTimeout(() => {
+    setGlobalState('alert', { show: false, msg, color })
+  }, 6000)
+}
+
+const setLoadingMsg = (msg) => {
+  setGlobalState('loading', { show: true, msg })
+}
 
 const truncate = (text, startChars, endChars, maxLength) => {
   if (text.length > maxLength) {
@@ -38,5 +52,7 @@ export {
   truncate,
   useGlobalState,
   setGlobalState,
-  getGlobalState
+  getGlobalState,
+  setLoadingMsg,
+  setAlert
 }
