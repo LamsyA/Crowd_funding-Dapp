@@ -125,6 +125,7 @@ const contributeToProject = async (id, backAmount) => {
       from: connectedAccount,
       value: backAmount._hex,
     })
+    return true;
   } catch (error) {
     reportError(error)
   }
