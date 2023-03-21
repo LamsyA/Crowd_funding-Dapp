@@ -33,14 +33,12 @@ const CreateProject = () => {
             }
             console.log(data)
 
-
             const result = await createNewProject(data)
             if (result === true) {
                 setAlert(`${title} Successfully Added...`)
             }
             else { setAlert(`Error adding ${title}`, "red") }
-
-
+            
             onClose()
         } catch (error) {
             setAlert(error.message, "red")
